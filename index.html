@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varun Motors - Vizag</title>
+<link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1ES-euNiP7XqrsflQXpnEIv23gMWXTerv">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+:root{
+/* Bright, glorious palette — near-white surface, saturated section accents */
+--page-bg:#f7f8fc;
+--surface:#ffffff;
+--surface-2:#f4f5fb;
+--line:#e6e8f2;
+--text:#191333;
+--muted:#6b7089;
+--primary:#7c3aed;
+--primary-2:#ec4899;
+--accent:#7c3aed; /* overridden per-section inline */
+--accent-soft:#f2e9ff;/* overridden per-section inline */
+--green:#0da96f;
+--green-soft:#dcfaef;
+--red:#e0294d;
+--red-soft:#ffe6ec;
+--mono:'IBM Plex Mono', monospace;
+--display:'Space Grotesk', sans-serif;
+--body:'Inter', sans-serif;
+--shadow-sm:0 2px 8px rgba(31,20,70,.06);
+--shadow-md:0 14px 34px rgba(48,26,110,.10);
+--shadow-glow:0 10px 26px rgba(124,58,237,.28);
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+margin:0;
+min-height:100vh;
+background:
+radial-gradient(700px 380px at 12% -8%, rgba(124,58,237,.16), transparent 60%),
+radial-gradient(620px 360px at 100% 0%, rgba(236,72,153,.14), transparent 55%),
+radial-gradient(760px 460px at 50% 115%, rgba(13,169,111,.10), transparent 60%),
+var(--page-bg);
+background-attachment:fixed;
+color:var(--text);
+font-family:var(--body);
+padding:18px 14px 56px;
+-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:960px;margin:0 auto;}
+.masthead{
+display:flex;flex-direction:column;gap:14px;
+background:var(--surface);
+border:1px solid var(--line);
+border-radius:20px;
+padding:20px;
+margin-bottom:2px;
+box-shadow:var(--shadow-md);
+position:relative;
+overflow:hidden;
+}
+.masthead::before{
+content:'';position:absolute;inset:0 0 auto 0;height:5px;
+background:linear-gradient(90deg, var(--primary), var(--primary-2), var(--green));
+}
+.masthead .eyebrow{
+font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+color:var(--primary-2);text-transform:uppercase;margin:0 0 6px;font-weight:600;
+}
+.masthead h1{
+font-family:var(--display);font-size:24px;margin:0;font-weight:800;
+letter-spacing:-0.01em;line-height:1.15;
+background:linear-gradient(120deg, var(--primary) 15%, var(--primary-2) 85%);
+-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.masthead .sub{color:var(--muted);font-size:13px;margin-top:6px;line-height:1.5;}
+.badge{
+display:inline-flex;align-items:center;gap:7px;
+font-family:var(--mono);font-size:11.5px;color:var(--text);
+background:var(--surface-2);border:1px solid var(--line);border-radius:20px;
+padding:6px 12px 6px 10px;white-space:nowrap;width:fit-content;font-weight:600;
+}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none;}
+.badge.ok .dot{background:var(--green);box-shadow:0 0 0 3px var(--green-soft);}
+.badge.bad .dot{background:var(--red);box-shadow:0 0 0 3px var(--red-soft);}
+
+@media (min-width:640px){
+.masthead{flex-direction:row;align-items:flex-end;justify-content:space-between;padding:26px 28px;}
+.masthead h1{font-size:30px;}
+}
+
+form{display:flex;flex-direction:column;gap:18px;}
+
+/* ---------- Sections ---------- */
+.section{
+background:var(--surface);border:1px solid var(--line);
+border-radius:18px;padding:10px 16px 22px;
+box-shadow:var(--shadow-sm);
+position:relative;overflow:hidden;
+}
+.section::before{
+content:'';position:absolute;inset:0 0 auto 0;height:4px;
+background:var(--accent);
+}
+@media (min-width:640px){ .section{padding:10px 26px 28px;} }
+
+.section-head{
+display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.section-num{
+font-family:var(--mono);color:var(--accent);font-size:12.5px;font-weight:700;
+background:var(--accent-soft);
+border-radius:8px;padding:4px 9px;
+}
+.section-title{font-family:var(--display);font-size:16px;font-weight:700;}
+
+/* Mobile-first grid: single column by default, 2 columns from tablet up */
+.grid{display:grid;grid-template-columns:1fr;gap:14px;}
+@media (min-width:640px){ .grid{grid-template-columns:1fr 1fr;gap:16px 18px;} }
+.field{display:flex;flex-direction:column;gap:6px;}
+.field.full{grid-column:1 / -1;}
+label{font-size:12.5px;color:var(--muted);font-weight:600;}
+label .req{color:var(--primary-2);}
+
+input[type=text], input[type=date], input[type=number], select{
+background:var(--surface-2);border:1.5px solid var(--line);
+color:var(--text);border-radius:11px;padding:12px 13px;
+font-family:var(--body);font-size:15px;outline:none;
+transition:border-color .15s, box-shadow .15s, background .15s;
+width:100%;min-height:46px;
+}
+input[readonly]{color:var(--muted);font-family:var(--mono);background:var(--surface-2);}
+input:focus, select:focus{
+border-color:var(--accent);background:var(--surface);
+box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+select{
+appearance:none;
+background-image:linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+background-size:5px 5px, 5px 5px;background-repeat:no-repeat;
+}
+
+.hint{font-size:11.5px;color:var(--muted);}
+.error-msg{font-size:11.5px;color:var(--red);min-height:14px;font-weight:600;}
+.field.invalid input, .field.invalid select{border-color:var(--red);background:var(--red-soft);}
+.field.valid input, .field.valid select{border-color:var(--green);}
+
+.file-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.thumb{
+width:56px;height:56px;border-radius:12px;object-fit:cover;
+border:2px solid var(--accent-soft);background:var(--surface-2);
+display:none;
+}
+.file-btn{
+background:var(--accent-soft);border:1.5px solid transparent;color:var(--accent);
+border-radius:11px;padding:11px 16px;font-size:13.5px;font-weight:700;cursor:pointer;
+min-height:46px;
+}
+.file-btn:hover{filter:brightness(0.97);}
+.file-btn-secondary{
+background:transparent;border:1.5px dashed var(--line);color:var(--muted);
+border-radius:11px;padding:10px 14px;font-size:12.5px;font-weight:600;cursor:pointer;
+min-height:46px;
+}
+.file-btn-secondary:hover{color:var(--accent);border-color:var(--accent-soft);}
+input[type=file]{display:none;}
+
+/* ---------- Submit ---------- */
+.submit-row{display:flex;flex-direction:column;gap:12px;}
+@media (min-width:640px){ .submit-row{flex-direction:row;align-items:center;gap:16px;} }
+button.submit{
+background:linear-gradient(120deg, var(--primary), var(--primary-2));
+color:#fff;border:none;border-radius:13px;
+padding:15px 26px;font-family:var(--display);font-weight:700;font-size:15px;
+cursor:pointer;letter-spacing:.01em;width:100%;
+box-shadow:var(--shadow-glow);
+transition:transform .12s, box-shadow .12s, opacity .12s;
+}
+@media (min-width:640px){ button.submit{width:auto;} }
+button.submit:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;}
+button.submit:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 16px 30px rgba(124,58,237,.34);}
+button.submit:active:not(:disabled){transform:translateY(0);}
+.status-msg{font-size:13px;font-family:var(--mono);font-weight:600;}
+.status-msg.error{color:var(--red);}
+.status-msg.success{color:var(--green);}
+
+/* ---------- Table ---------- */
+.table-section{margin-top:26px;}
+.table-section .section-head{justify-content:space-between;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:1100px;}
+th, td{
+text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);
+white-space:nowrap;
+}
+th{
+font-family:var(--mono);color:var(--muted);text-transform:uppercase;
+font-size:10.5px;letter-spacing:.06em;font-weight:700;
+background:var(--surface-2);position:sticky;top:0;
+}
+tbody tr:hover{background:var(--surface-2);}
+td{color:var(--text);}
+td a{color:var(--accent);font-weight:600;text-decoration:none;}
+td a:hover{text-decoration:underline;}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;-webkit-overflow-scrolling:touch;}
+.empty-row td{color:var(--muted);text-align:center;padding:26px;font-family:var(--mono);}
+.photo-cell img{width:30px;height:30px;border-radius:8px;object-fit:cover;}
+.refresh-btn{
+font-family:var(--mono);font-size:11.5px;color:var(--accent);font-weight:700;
+background:var(--accent-soft);border:none;border-radius:20px;
+padding:8px 14px;cursor:pointer;min-height:38px;
+}
+.refresh-btn:hover{filter:brightness(0.97);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="masthead">
+<div>
+<p class="eyebrow">VARUN MOTORS MARUTI DIVISION</p>
+<h1>Master Data Creation</h1>
+<p class="sub">**<b>Please fill in every field accurately.</b>** The information provided will be used to determine your incentive benefits. Any incorrect, incomplete, or mismatched information may result in the withholding or suspension of your incentive benefits until the details are verified and corrected.
+</p>
+</div>
+<div class="badge" id="configBadge"><span class="dot"></span><span id="configBadgeText">Checking connection…</span></div>
+</div>
+
+<form id="onboardForm" novalidate>
+
+<div class="section" style="--accent:#7c3aed;--accent-soft:#f2e9ff;">
+<div class="section-head"><span class="section-num">01</span><span class="section-title">Branch</span></div>
+<div class="grid">
+<div class="field" id="f-location">
+<label>Location <span class="req">*</span></label>
+<select id="location" required>
+<option value="">Select a location…</option>
+</select>
+<div class="error-msg"></div>
+</div>
+<div class="field" id="f-branchCode">
+<label>Branch Code</label>
+<input type="text" id="branchCode" readonly placeholder="Auto-fills on location select">
+<div class="error-msg"></div>
+</div>
+</div>
+</div>
+
+<div class="section" style="--accent:#ec4899;--accent-soft:#fde7f3;">
+<div class="section-head"><span class="section-num">02</span><span class="section-title">Employee details</span></div>
+<div class="grid">
+<div class="field" id="f-employeeId">
+<label>Employee ID <span class="req">*</span></label>
+<input type="text" id="employeeId" placeholder="MA123456" maxlength="8" autocomplete="off">
+<div class="hint">Format: MA followed by 6 digits (8 characters total)</div>
+<div class="error-msg"></div>
+</div>
+<div class="field" id="f-employeeName">
+<label>Employee Name <span class="req">*</span></label>
+<input type="text" id="employeeName" placeholder="e.g. K. Ramesh Kumar" autocomplete="off">
+<div class="hint">Letters, spaces and periods only</div>
+<div class="error-msg"></div>
+</div>
+<div class="field" id="f-designation">
+<label>Designation <span class="req">*</span></label>
+<input type="text" id="designation" placeholder="e.g. Service Advisor" autocomplete="off">
+<div class="error-msg"></div>
+</div>
+<div class="field" id="f-doj">
+<label>Date of Joining <span class="req">*</span></label>
+<input type="date" id="doj">
+<div class="hint">Any valid date</div>
+<div class="error-msg"></div>
+</div>
+<div class="field full" id="f-employeeImage">
+<label>Employee Photo <span class="req">*</span></label>
+<div class="file-row">
+<img class="thumb" id="thumbPreview" alt="">
+<button type="button" class="file-btn" id="fileBtn">📷 Choose JPEG…</button>
+<button type="button" class="file-btn-secondary" id="galleryBtn">Choose from gallery</button>
+<input type="file" id="employeeImage" accept="image/jpeg" capture="environment">
+<input type="file" id="employeeImageGallery" accept="image/jpeg">
+<span class="hint" id="fileHint">.jpeg only — larger photos are compressed to fit under 1 MB automatically</span>
+</div>
+<div class="error-msg"></div>
+</div>
+</div>
+</div>
+
+<div class="section" style="--accent:#06b6d4;--accent-soft:#e0f7fb;">
+<div class="section-head"><span class="section-num">03</span><span class="section-title">Channel &amp; identifiers</span></div>
+<div class="grid">
+<div class="field" id="f-channel">
+<label>Channel <span class="req">*</span></label>
+<select id="channel">
+<option value="">Select channel…</option>
+<option value="WORKSHOP">WORKSHOP</option>
+<option value="BODYSHOP">BODYSHOP</option>
+</select>
+<div class="error-msg"></div>
+</div>
+<div class="field" id="f-mspin">
+<label>MSPIN <span class="req">*</span></label>
+<input type="text" id="mspin" placeholder="Up to 10 digits" maxlength="10" autocomplete="off">
+<div class="error-msg"></div>
+</div>
+</div>
+</div>
+<div class="section" style="--accent:#f59e0b;--accent-soft:#fef3c7;">
+<div class="section-head"><span class="section-num">04</span><span class="section-title">Targets</span></div>
+<div class="grid">
+<div class="field" id="f-loadTarget"><label>Load Target <span class="req">*</span></label><input type="text" inputmode="decimal" id="loadTarget" placeholder="0"><div class="error-msg"></div></div>
+<div class="field" id="f-labourTarget"><label>Labour Target <span class="req">*</span></label><input type="text" inputmode="decimal" id="labourTarget" placeholder="0"><div class="error-msg"></div></div>
+<div class="field" id="f-vasTarget"><label>Vas Target <span class="req">*</span></label><input type="text" inputmode="decimal" id="vasTarget" placeholder="0"><div class="error-msg"></div></div>
+<div class="field" id="f-accTarget"><label>Acc Target <span class="req">*</span></label><input type="text" inputmode="decimal" id="accTarget" placeholder="0"><div class="error-msg"></div></div>
+<div class="field" id="f-tyresTarget"><label>Tyres Target <span class="req">*</span></label><input type="text" inputmode="decimal" id="tyresTarget" placeholder="0"><div class="error-msg"></div></div>
+<div class="field" id="f-batteriesTarget"><label>Batteries Target <span class="req">*</span></label><input type="text" inputmode="decimal" id="batteriesTarget" placeholder="0"><div class="error-msg"></div></div>
+<div class="field" id="f-amcBooks"><label>AMC Books <span class="req">*</span></label><input type="text" inputmode="decimal" id="amcBooks" placeholder="0"><div class="error-msg"></div></div>
+</div>
+</div>
+
+<div class="submit-row">
+<button type="submit" class="submit" id="submitBtn">Save Entry</button>
+<span class="status-msg" id="statusMsg"></span>
+</div>
+</form>
+
+<div class="table-section section" style="--accent:#0da96f;--accent-soft:#dcfaef;">
+<div class="section-head" style="justify-content:space-between;">
+<div style="display:flex;align-items:baseline;gap:10px;">
+<span class="section-num">05</span><span class="section-title">Last 5 submissions</span>
+</div>
+<button class="refresh-btn" id="refreshBtn" type="button">↻ Refresh</button>
+</div>
+<div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th>Photo</th><th>Time</th><th>Location</th><th>Branch Code</th>
+<th>Emp ID</th><th>Name</th><th>Designation</th><th>DOJ</th>
+<th>Channel</th><th>MSPIN</th><th>Load</th><th>Labour</th>
+<th>Vas</th><th>Acc</th><th>Tyres</th><th>Batteries</th><th>AMC</th>
+</tr>
+</thead>
+<tbody id="tableBody">
+<tr class="empty-row"><td colspan="17">No submissions loaded yet</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<script>
+/* ============ CONFIG ============ */
+// Paste the Web App URL from your Google Apps Script deployment here:
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbydTuYiOeWAM5S7w9tIUBsmhrwtr7acKbc99h1YITQmTn600jPp-Pj4D6GKHo7KOdAVsg/exec";
+
+/* ============ BRANCH DATA ============ */
+const BranchData = [
+["100FT RING ROAD-2S", "4603-S2"],
+["ADAVIVARAM-2S(NEXA)", "46NA-03"],
+["ADDA ROAD-SRV", "SFR1-B1"],
+["AGANAMPUDI-SRV", "4603-10"],
+["ANNAVARAM-3S(RO)", "SJH1-01"],
+["ARAKU VALLEY-3S(RO)", "SJG1-01"],
+["BALAJI NAGAR-SOW(NEXA)", "46NA-S1"],
+["BOBBILLI-R(3S)", "CAM1-01"],
+["BRTS ROAD-2S", "BAP1-02"],
+["CHALAMAYYA NAGAR-SOW", "SJH1-B1"],
+["CHINNA WALTAIR-SRV", "4603-1B"],
+["CHODAVARAM-3S(RO)", "SHT1-01"],
+["DRAKSHARAMAM-3S(RO)", "TCB1-01"],
+["GAJUWAKA", "4603-0E"],
+["GOVADA VILLAGE-SRV", "SHT1-B1"],
+["KAKINADA-2S", "W7NA-01"],
+["KAPPARADA-SRV", "4607-01"],
+["KORUKONDA-3S(RO)", "SWR1-01"],
+["KOTAPADU-3S(RO)", "SYU1-01"],
+["KOTHAGUDEM-2S(NEXA)", "26NA-03"],
+["KOTHAVALASA-SRV", "TCM1-01"],
+["KURUPAM-3S(RO)", "SZF1-01"],
+["MADHURAWADA VILLAGE-SRV", "4603-0L"],
+["MALKIPURAM-3S(RO)", "SEH1-01"],
+["MARRIPALEM-2S(NEXA)", "46NA-01"],
+["NAKKAPALLI-3S(RO)", "SFR1-01"],
+["NH-5 ROAD", "4603-0F"],
+["PALACHARLA VILLAGE-2S", "C502-01"],
+["PALAKONDA-3S(RO)", "CKO1-01"],
+["PATHAPATNAM-3S(RO)", "SSJ1-01"],
+["PEADDAPADU PANCHAYAT-2S(NEXA)", "W6NA-01"],
+["PEDAPADU ROAD-2S(NEXA)", "W6NA-S1"],
+["PEDDA PADDU ROAD - SRV", "4603-09"],
+["PEDDAPURAM-3S(RO)", "SYN1-01"],
+["PENDURTHI-2S(STUDIO)", "BAPN-01"],
+["PENDURTHI-SRV", "BAP1-01"],
+["PUSPATIREGA-SRV", "4603-11"],
+["RAJAM-SRV", "BLJ1-01"],
+["RAMPACHODAVARAM-3S(RO)", "SOK1-01"],
+["SALUR-3S(RO)", "SYV1-01"],
+["SIRIPURAM", "4603-08"],
+["SOMPETA-3S(RO)", "GLX1-01"],
+["TEKKALI-3S(RO)", "STF1-01"],
+["THAGARAPUVALASA-R(3S)", "CQV1-01"],
+["VISHAKHAPATNAM-2S(NEXA)", "46NA-02"],
+["VISHAKHAPATNAM-SRV", "4603-0K"],
+["VIZIANAGARAM-SRV", "4603-0C"],
+["YELESWARAM-3S(RO)", "SQP1-01"],
+["YENDADA-2S", "4603-13"]
+];
+
+/* ============ ELEMENTS ============ */
+const el = id => document.getElementById(id);
+const locationSel = el('location');
+const branchCodeInput = el('branchCode');
+const employeeIdInput = el('employeeId');
+const employeeNameInput = el('employeeName');
+const designationInput = el('designation');
+const dojInput = el('doj');
+const imageInput = el('employeeImage');
+const galleryInput = el('employeeImageGallery');
+const fileBtn = el('fileBtn');
+const galleryBtn = el('galleryBtn');
+const thumbPreview = el('thumbPreview');
+const fileHint = el('fileHint');
+const channelSel = el('channel');
+const mspinInput = el('mspin');
+const targetIds = ['loadTarget','labourTarget','vasTarget','accTarget','tyresTarget','batteriesTarget','amcBooks'];
+const form = el('onboardForm');
+const submitBtn = el('submitBtn');
+const statusMsg = el('statusMsg');
+const configBadge = el('configBadge');
+const tableBody = el('tableBody');
+
+let employeeImageDataUrl = '';
+
+/* Populate location dropdown */
+BranchData.slice().sort((a,b)=>a[0].localeCompare(b[0])).forEach(([name]) => {
+const opt = document.createElement('option');
+opt.value = name;
+opt.textContent = name;
+locationSel.appendChild(opt);
+});
+const branchMap = Object.fromEntries(BranchData);
+
+locationSel.addEventListener('change', () => {
+branchCodeInput.value = branchMap[locationSel.value] || '';
+validateField('location');
+validateField('branchCode');
+});
+
+/* Image picker — primary button opens the camera first on mobile devices
+ (via the capture="environment" attribute); secondary link falls back to
+ the photo gallery / file browser. Desktop browsers ignore "capture" and
+ just show the normal file picker for both. */
+fileBtn.addEventListener('click', () => imageInput.click());
+galleryBtn.addEventListener('click', () => galleryInput.click());
+imageInput.addEventListener('change', () => handleImageFile_(imageInput));
+galleryInput.addEventListener('change', () => handleImageFile_(galleryInput));
+
+function handleImageFile_(sourceInput) {
+const file = sourceInput.files[0];
+employeeImageDataUrl = '';
+thumbPreview.style.display = 'none';
+if (!file) { validateField('employeeImage'); return; }
+
+const isJpeg = file.type === 'image/jpeg' || /\.jpe?g$/i.test(file.name);
+if (!isJpeg) {
+setError('employeeImage', 'File must be a .jpeg image');
+sourceInput.value = '';
+return;
+}
+
+const originalMB = (file.size / 1024 / 1024).toFixed(2);
+
+if (file.size <= MAX_IMAGE_BYTES) {
+// Already small enough — use as-is, no re-encoding needed.
+readFileAsDataUrl_(file).then(dataUrl => {
+employeeImageDataUrl = dataUrl;
+thumbPreview.src = dataUrl;
+thumbPreview.style.display = 'block';
+fileHint.textContent = file.name + ' — ' + originalMB + ' MB';
+clearError('employeeImage');
+});
+return;
+}
+
+// Over 1MB: compress in the browser. The whole frame is kept — nothing is
+// cropped — we only lower JPEG quality, and shrink the full image
+// proportionally as a last resort if quality alone can't get it under 1MB.
+fileBtn.disabled = true;
+galleryBtn.disabled = true;
+fileHint.textContent = 'Compressing ' + originalMB + ' MB photo…';
+
+compressImageUnder1MB_(file).then(({ dataUrl, blob, width, height }) => {
+if (!blob || blob.size > MAX_IMAGE_BYTES) {
+setError('employeeImage', 'Could not compress this photo below 1 MB — please try a different photo');
+sourceInput.value = '';
+fileHint.textContent = '.jpeg only — larger photos are compressed to fit under 1 MB automatically';
+return;
+}
+employeeImageDataUrl = dataUrl;
+thumbPreview.src = dataUrl;
+thumbPreview.style.display = 'block';
+const finalKB = (blob.size / 1024).toFixed(0);
+fileHint.textContent = file.name + ' — compressed from ' + originalMB + ' MB to ' + finalKB + ' KB (' + width + '×' + height + ', full frame kept)';
+clearError('employeeImage');
+}).catch(() => {
+setError('employeeImage', 'Could not read this photo — please try again');
+sourceInput.value = '';
+fileHint.textContent = '.jpeg only — larger photos are compressed to fit under 1 MB automatically';
+}).finally(() => {
+fileBtn.disabled = false;
+galleryBtn.disabled = false;
+});
+}
+
+function readFileAsDataUrl_(file) {
+return new Promise((resolve, reject) => {
+const reader = new FileReader();
+reader.onload = () => resolve(reader.result);
+reader.onerror = reject;
+reader.readAsDataURL(file);
+});
+}
+
+/* Leave a safety margin below the hard 1MB (1,048,576 byte) ceiling. */
+const MAX_IMAGE_BYTES = 1024 * 1024;
+const TARGET_IMAGE_BYTES = 1000 * 1024;
+
+async function loadDrawableImage_(file) {
+if (window.createImageBitmap) {
+try {
+return await createImageBitmap(file, { imageOrientation: 'from-image' });
+} catch (e) { /* fall through to <img> based loading */ }
+}
+return new Promise((resolve, reject) => {
+const img = new Image();
+const url = URL.createObjectURL(file);
+img.onload = () => { resolve(img); URL.revokeObjectURL(url); };
+img.onerror = reject;
+img.src = url;
+});
+}
+
+function renderJpegBlob_(source, width, height, quality) {
+const canvas = document.createElement('canvas');
+canvas.width = width;
+canvas.height = height;
+const ctx = canvas.getContext('2d');
+// Draws the full, unmodified frame at these dimensions — no cropping,
+// no cutting off edges, just full-image scaling/recompression.
+ctx.drawImage(source, 0, 0, width, height);
+return new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+}
+
+async function compressImageUnder1MB_(file) {
+const source = await loadDrawableImage_(file);
+let width = source.width || source.naturalWidth;
+let height = source.height || source.naturalHeight;
+
+let quality = 0.92;
+let blob = await renderJpegBlob_(source, width, height, quality);
+
+// Step 1: lower JPEG quality only — full frame, full resolution kept.
+while (blob && blob.size > TARGET_IMAGE_BYTES && quality > 0.35) {
+quality = Math.max(0.35, quality - 0.08);
+blob = await renderJpegBlob_(source, width, height, quality);
+}
+
+// Step 2 (only if still over target): scale the whole image down
+// proportionally and repeat the quality ramp. Still no cropping —
+// width and height shrink together, so nothing is cut off.
+let guard = 0;
+while (blob && blob.size > TARGET_IMAGE_BYTES && Math.min(width, height) > 480 && guard < 8) {
+width = Math.round(width * 0.85);
+height = Math.round(height * 0.85);
+quality = 0.85;
+blob = await renderJpegBlob_(source, width, height, quality);
+while (blob && blob.size > TARGET_IMAGE_BYTES && quality > 0.35) {
+quality = Math.max(0.35, quality - 0.08);
+blob = await renderJpegBlob_(source, width, height, quality);
+}
+guard++;
+}
+
+const dataUrl = blob ? await readFileAsDataUrl_(blob) : '';
+return { dataUrl, blob, width, height };
+}
+
+/* Numeric-only inputs for targets + mspin */
+function digitsOnlyFilter(input, maxLen) {
+input.addEventListener('input', () => {
+let v = input.value.replace(/[^0-9.]/g, '');
+// allow only one decimal point
+const parts = v.split('.');
+if (parts.length > 2) v = parts[0] + '.' + parts.slice(1).join('');
+if (maxLen) v = v.replace(/\D/g,'').slice(0, maxLen);
+input.value = v;
+});
+}
+targetIds.forEach(id => digitsOnlyFilter(el(id)));
+mspinInput.addEventListener('input', () => {
+mspinInput.value = mspinInput.value.replace(/\D/g, '').slice(0, 10);
+});
+
+/* Employee name: letters, space, period only */
+employeeNameInput.addEventListener('input', () => {
+employeeNameInput.value = employeeNameInput.value.replace(/[^A-Za-z. ]/g, '');
+});
+
+/* Employee ID: force MA prefix casing */
+employeeIdInput.addEventListener('input', () => {
+let v = employeeIdInput.value.toUpperCase().slice(0, 8);
+employeeIdInput.value = v;
+});
+
+/* ============ VALIDATION ============ */
+function setError(fieldId, msg) {
+const wrap = el('f-' + fieldId);
+wrap.classList.add('invalid');
+wrap.classList.remove('valid');
+const errBox = wrap.querySelector('.error-msg');
+if (errBox) errBox.textContent = msg;
+}
+function clearError(fieldId) {
+const wrap = el('f-' + fieldId);
+wrap.classList.remove('invalid');
+wrap.classList.add('valid');
+const errBox = wrap.querySelector('.error-msg');
+if (errBox) errBox.textContent = '';
+}
+
+function validateField(fieldId) {
+switch (fieldId) {
+case 'location': {
+if (!locationSel.value) { setError('location', 'Select a location'); return false; }
+clearError('location'); return true;
+}
+case 'branchCode': {
+if (!branchCodeInput.value) { setError('branchCode', 'Auto-fills once a location is chosen'); return false; }
+clearError('branchCode'); return true;
+}
+case 'employeeId': {
+const v = employeeIdInput.value;
+if (!/^MA\d{6}$/.test(v)) { setError('employeeId', 'Must be MA followed by exactly 6 digits'); return false; }
+clearError('employeeId'); return true;
+}
+case 'employeeName': {
+const v = employeeNameInput.value.trim();
+if (!v || !/^[A-Za-z][A-Za-z. ]*$/.test(v)) { setError('employeeName', 'Letters, spaces and periods only'); return false; }
+clearError('employeeName'); return true;
+}
+case 'designation': {
+if (!designationInput.value.trim()) { setError('designation', 'Required'); return false; }
+clearError('designation'); return true;
+}
+case 'employeeImage': {
+if (!employeeImageDataUrl) { setError('employeeImage', 'A .jpeg photo under 1 MB is required'); return false; }
+clearError('employeeImage'); return true;
+}
+case 'doj': {
+const v = dojInput.value;
+if (!v) { setError('doj', 'Required'); return false; }
+clearError('doj'); return true;
+}
+case 'channel': {
+if (!channelSel.value) { setError('channel', 'Select a channel'); return false; }
+clearError('channel'); return true;
+}
+case 'mspin': {
+const v = mspinInput.value;
+if (!/^\d{1,10}$/.test(v)) { setError('mspin', 'Numeric only, up to 10 digits'); return false; }
+clearError('mspin'); return true;
+}
+default: {
+if (targetIds.includes(fieldId)) {
+const v = el(fieldId).value;
+if (!/^\d+(\.\d+)?$/.test(v)) { setError(fieldId, 'Numbers only'); return false; }
+clearError(fieldId); return true;
+}
+return true;
+}
+}
+}
+
+const allFieldIds = ['location','branchCode','employeeId','employeeName','designation','employeeImage','doj','channel','mspin', ...targetIds];
+allFieldIds.forEach(id => {
+const node = el(id);
+if (node) node.addEventListener('blur', () => validateField(id));
+});
+
+function validateAll() {
+let ok = true;
+allFieldIds.forEach(id => { if (!validateField(id)) ok = false; });
+return ok;
+}
+
+/* ============ SUBMIT ============ */
+async function postToScript_(payload) {
+const res = await fetch(SCRIPT_URL, {
+method: 'POST',
+headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+body: JSON.stringify(payload)
+});
+return res.json();
+}
+
+form.addEventListener('submit', async (e) => {
+e.preventDefault();
+statusMsg.textContent = '';
+statusMsg.className = 'status-msg';
+
+if (!validateAll()) {
+statusMsg.textContent = 'Fix the highlighted fields before saving.';
+statusMsg.classList.add('error');
+const firstInvalid = document.querySelector('.field.invalid');
+if (firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+return;
+}
+if (!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+statusMsg.textContent = 'Google Apps Script URL not configured yet — see setup instructions.';
+statusMsg.classList.add('error');
+return;
+}
+
+const payload = {
+location: locationSel.value,
+branchCode: branchCodeInput.value,
+employeeId: employeeIdInput.value,
+employeeName: employeeNameInput.value.trim(),
+designation: designationInput.value.trim(),
+employeeImage: employeeImageDataUrl,
+doj: dojInput.value,
+channel: channelSel.value,
+mspin: mspinInput.value,
+loadTarget: el('loadTarget').value,
+labourTarget: el('labourTarget').value,
+vasTarget: el('vasTarget').value,
+accTarget: el('accTarget').value,
+tyresTarget: el('tyresTarget').value,
+batteriesTarget: el('batteriesTarget').value,
+amcBooks: el('amcBooks').value
+};
+
+submitBtn.disabled = true;
+statusMsg.textContent = 'Saving to Google Sheet…';
+
+try {
+let json = await postToScript_(payload);
+
+// If another user's submission is holding the sheet lock, wait briefly and
+// retry once automatically before asking the person to retry manually.
+if (json.status === 'error' && /another submission/i.test(json.message || '')) {
+statusMsg.textContent = 'Sheet is busy with another entry — retrying…';
+await new Promise(r => setTimeout(r, 2500));
+json = await postToScript_(payload);
+}
+
+if (json.status === 'success') {
+statusMsg.textContent = 'Saved successfully.';
+statusMsg.classList.add('success');
+form.reset();
+branchCodeInput.value = '';
+employeeImageDataUrl = '';
+thumbPreview.style.display = 'none';
+fileHint.textContent = '.jpeg only — larger photos are compressed to fit under 1 MB automatically';
+allFieldIds.forEach(id => {
+const wrap = el('f-' + id);
+if (wrap) { wrap.classList.remove('valid','invalid'); const eb = wrap.querySelector('.error-msg'); if (eb) eb.textContent=''; }
+});
+loadRecent();
+} else {
+statusMsg.textContent = 'Save failed: ' + (json.message || 'Unknown error');
+statusMsg.classList.add('error');
+}
+} catch (err) {
+statusMsg.textContent = 'Network error — entry was not saved. ' + err.message;
+statusMsg.classList.add('error');
+} finally {
+submitBtn.disabled = false;
+}
+});
+
+/* ============ DATE FORMAT HELPER ============ */
+// Google Sheets stores date-typed cells at local midnight (Asia/Kolkata) and
+// the Apps Script GET endpoint serializes them as UTC ISO strings, which
+// shifts the displayed date back a day (e.g. 2022-08-22 -> ...T18:30:00.000Z).
+// Convert back to the sheet's local calendar date instead of trusting the
+// raw UTC value.
+function formatDate_(v) {
+if (!v) return '';
+if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(v)) {
+const d = new Date(v);
+if (!isNaN(d)) return d.toLocaleDateString('en-GB', { timeZone: 'Asia/Kolkata' });
+}
+const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+if (m) return `${m[3]}/${m[2]}/${m[1]}`;
+return v;
+}
+
+// Same as formatDate_ but keeps the local time-of-day too, for the
+// full Timestamp column (Submitted-at), not just date-only fields like DOJ.
+function formatDateTime_(v) {
+if (!v) return '';
+if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(v)) {
+const d = new Date(v);
+if (!isNaN(d)) {
+const datePart = d.toLocaleDateString('en-GB', { timeZone: 'Asia/Kolkata' });
+const timePart = d.toLocaleTimeString('en-GB', { timeZone: 'Asia/Kolkata' });
+return `${datePart} ${timePart}`;
+}
+}
+return v;
+}
+
+/* ============ LAST 5 TABLE ============ */
+function setBadge_(text, state) {
+el('configBadgeText').textContent = text;
+configBadge.classList.remove('ok', 'bad');
+if (state) configBadge.classList.add(state);
+}
+
+async function loadRecent() {
+if (!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+setBadge_('Backend not connected', 'bad');
+return;
+}
+try {
+const res = await fetch(SCRIPT_URL, { method: 'GET' });
+const json = await res.json();
+setBadge_('Connected', 'ok');
+if (json.status !== 'success' || !json.rows || !json.rows.length) {
+tableBody.innerHTML = '<tr class="empty-row"><td colspan="17">No submissions yet</td></tr>';
+return;
+}
+tableBody.innerHTML = json.rows.map(r => `
+<tr>
+<td class="photo-cell">${r['Employee Image'] ? `<a href="${r['Employee Image']}" target="_blank">photo</a>` : '—'}</td>
+<td>${formatDateTime_(r['Timestamp'])}</td>
+<td>${r['Location'] || ''}</td>
+<td>${branchMap[r['Location']] || r['Branch Code'] || ''}</td>
+<td>${r['Employee ID'] || ''}</td>
+<td>${r['Employee Name'] || ''}</td>
+<td>${r['Designation'] || ''}</td>
+<td>${formatDate_(r['DOJ'])}</td>
+<td>${r['Channel'] || ''}</td>
+<td>${r['MSPIN'] || ''}</td>
+<td>${r['Load Target'] || ''}</td>
+<td>${r['Labour Target'] || ''}</td>
+<td>${r['Vas Target'] || ''}</td>
+<td>${r['Acc Target'] || ''}</td>
+<td>${r['Tyres Target'] || ''}</td>
+<td>${r['Batteries Target'] || ''}</td>
+<td>${r['AMC Books'] || ''}</td>
+</tr>
+`).join('');
+} catch (err) {
+setBadge_('Connection error', 'bad');
+tableBody.innerHTML = '<tr class="empty-row"><td colspan="17">Could not load submissions</td></tr>';
+}
+}
+el('refreshBtn').addEventListener('click', loadRecent);
+loadRecent();
+</script>
+
+<script>
+/* ============ COSMETIC DEV-TOOLS DETERRENTS ============
+   Note: these only discourage casual right-click / keyboard-shortcut
+   attempts. They do NOT prevent viewing source via the browser menu,
+   proxies, or curl — the HTML/JS/CSS is always downloaded to the
+   client and cannot be truly hidden. See backend for real security. */
+
+// Disable right-click context menu
+document.addEventListener('contextmenu', function (e) {
+e.preventDefault();
+});
+
+// Block common "view source / devtools" keyboard shortcuts
+document.addEventListener('keydown', function (e) {
+const key = e.key;
+const k = typeof key === 'string' ? key.toLowerCase() : '';
+
+// F12
+if (k === 'f12') { e.preventDefault(); return; }
+
+// Ctrl/Cmd + Shift + I / J / C  (DevTools panels)
+if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) {
+e.preventDefault(); return;
+}
+
+// Ctrl/Cmd + U (View Source)
+if ((e.ctrlKey || e.metaKey) && k === 'u') {
+e.preventDefault(); return;
+}
+
+// Ctrl/Cmd + S (Save Page)
+if ((e.ctrlKey || e.metaKey) && k === 's') {
+e.preventDefault(); return;
+}
+});
+
+// Best-effort DevTools-open detection via window size delta.
+// Not reliable on all browsers/devices; purely cosmetic.
+(function () {
+const threshold = 160;
+let warned = false;
+function checkDevTools() {
+const widthGap = window.outerWidth - window.innerWidth > threshold;
+const heightGap = window.outerHeight - window.innerHeight > threshold;
+if ((widthGap || heightGap) && !warned) {
+warned = true;
+console.log('%cDeveloper tools are not supported on this page.', 'color:#e0294d;font-size:14px;font-weight:bold;');
+}
+if (!widthGap && !heightGap) warned = false;
+}
+setInterval(checkDevTools, 1000);
+})();
+</script>
+</body>
+</html>
